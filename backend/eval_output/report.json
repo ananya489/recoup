@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-09-02T09:26:47.393748+00:00",
+  "dataset_seed": 42,
+  "n_cases": 1000,
+  "revenue_at_risk_paise": 95159714,
+  "baseline": {
+    "cases_evaluated": 1000,
+    "recovery_rate": 0.512,
+    "revenue_recovered_paise": 46948078,
+    "revenue_at_risk_paise": 95159714,
+    "unnecessary_interventions": 79,
+    "unnecessary_intervention_rate": 0.079,
+    "human_escalations": 0,
+    "safe_stops": 58,
+    "interventions_taken": 942,
+    "revenue_recovered_per_intervention_paise": 49838.72
+  },
+  "recoup": {
+    "cases_evaluated": 1000,
+    "recovery_rate": 0.426,
+    "revenue_recovered_paise": 38758444,
+    "revenue_at_risk_paise": 95159714,
+    "unnecessary_interventions": 0,
+    "unnecessary_intervention_rate": 0.0,
+    "human_escalations": 97,
+    "safe_stops": 233,
+    "interventions_taken": 670,
+    "revenue_recovered_per_intervention_paise": 57848.42
+  },
+  "recovery_uplift_paise": -8189634,
+  "unnecessary_intervention_reduction": 79,
+  "note": "The recoup numbers use a deterministic rule-based stand-in for the AI recommender, not a live LLM call. The policy engine itself is the real production code being measured."
+}
