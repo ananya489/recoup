@@ -1,8 +1,7 @@
 from datetime import datetime, timezone
-from typing import Optional
+from uuid import uuid4
 
 from app.db.mongo import get_db
-from app.models.schemas import AuditLog
 
 
 async def write_audit_log(
@@ -10,28 +9,26 @@ async def write_audit_log(
     actor: str,
     entity_type: str,
     entity_id: str,
-    metadata: Optional[dict] = None,
+    metadata: dict | None = None,
 ) -> None:
     """
-    Append one audit record to MongoDB.
+    Write one audit event to MongoDB.
 
-    Audit records are append-only.
-    This function inserts records and does not update or delete them.
-
-    Never put secrets, API keys, or webhook secrets in metadata.
+    Every audit record gets an explicit UUID string _id.
+    This prevents MongoDB from generating a BSON ObjectId,
+    which cannot be returned directly by FastAPI's JSON encoder.
     """
 
     db = get_db()
 
-    entry = AuditLog(
-        event_type=event_type,
-        actor=actor,
-        entity_type=entity_type,
-        entity_id=entity_id,
-        metadata=metadata or {},
-        timestamp=datetime.now(timezone.utc),
-    )
+    document = {
+        "_id": str(uuid4()),
+        "event_type": event_type,
+        "actor": actor,
+        "entity_type": entity_type,
+        "entity_id": entity_id,
+        "metadata": metadata or {},
+        "timestamp": datetime.now(timezone.utc),
+    }
 
-    await db.audit_logs.insert_one(
-        entry.model_dump()
-    )
+    await db.audit_logs.insert_one(document)
