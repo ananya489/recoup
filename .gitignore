@@ -39,3 +39,11 @@ backend/tests/manual_test_actions.py
 
 # Logs
 *.log
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/*.tsbuildinfo
+frontend/*.d.ts
+frontend/vite.config.js
