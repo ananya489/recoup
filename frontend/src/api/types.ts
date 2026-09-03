@@ -63,23 +63,39 @@ export interface PolicyVerdict {
 
 export interface RecoveryCase {
   _id: string;
+
   payment_id: string;
+
+  customer_id?: string | null;
+
   customer_contact?: string | null;
+
   amount_paise: number;
+
   status: CaseStatus;
+
   auto_retry_count?: number;
+
   failure_event_count?: number;
+
   first_failure_at?: string | null;
+
   recovered_at?: string | null;
+
   recovered_amount_paise?: number | null;
+
   last_ai_decision?:
     | RecoveryDecision
     | null;
+
   last_policy_verdict?:
     | PolicyVerdict
     | null;
+
   last_evaluated_at?: string | null;
+
   last_action_at?: string | null;
+
   updated_at?: string | null;
 }
 

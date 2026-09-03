@@ -1,16 +1,34 @@
-import type { ReactNode } from "react";
+import type {
+  ReactNode,
+} from "react";
+
+export type AppView =
+  | "dashboard"
+  | "cases";
 
 interface AppShellProps {
   children: ReactNode;
+  currentView: AppView;
+  onNavigate: (
+    view: AppView,
+  ) => void;
 }
 
 export default function AppShell({
   children,
+  currentView,
+  onNavigate,
 }: AppShellProps) {
   return (
     <div className="app-shell">
       <header className="app-header">
-        <div className="brand">
+        <button
+          type="button"
+          className="brand-button"
+          onClick={() =>
+            onNavigate("dashboard")
+          }
+        >
           <span className="brand-mark">
             Recoup
           </span>
@@ -19,19 +37,42 @@ export default function AppShell({
             AI Revenue Recovery — Razorpay
             Test Mode
           </span>
-        </div>
+        </button>
 
         <nav className="app-nav">
-          <span className="nav-item nav-item--active">
+          <button
+            type="button"
+            className={[
+              "nav-item",
+              currentView === "dashboard"
+                ? "nav-item--active"
+                : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            onClick={() =>
+              onNavigate("dashboard")
+            }
+          >
             Dashboard
-          </span>
+          </button>
 
-          <span
-            className="nav-item nav-item--disabled"
-            title="Coming in Sub-batch B3"
+          <button
+            type="button"
+            className={[
+              "nav-item",
+              currentView === "cases"
+                ? "nav-item--active"
+                : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            onClick={() =>
+              onNavigate("cases")
+            }
           >
             Cases
-          </span>
+          </button>
         </nav>
       </header>
 
