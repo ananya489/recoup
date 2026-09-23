@@ -6,9 +6,6 @@ Built for the **Razorpay AI Buildathon — Track 03: AI Revenue Recovery**.
 
 ---
 
-
-
-
 ## Why Recoup?
 
 Every failed payment represents revenue that may still be recoverable — but blindly retrying every failure is not a safe strategy.
